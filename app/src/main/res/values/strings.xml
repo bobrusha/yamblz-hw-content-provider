@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Content_provider_server</string>
+
+    <string name="account_type">content_provider_server.yandex.android.bobrusha.com</string>
+</resources>
