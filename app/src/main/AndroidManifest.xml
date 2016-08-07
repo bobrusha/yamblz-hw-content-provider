@@ -4,6 +4,7 @@
           xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <permission android:name="ru.yandex.yamblz.READ_ARTISTS"/>
 
     <application
         android:allowBackup="true"
@@ -14,18 +15,20 @@
 
         <provider
             android:name="com.bobrusha.android.yandex.content_provider_server.content_provider.MyProvider"
-            android:authorities="com.bobrusha.android.yandex.DB"
+            android:authorities="com.bobrusha.android.yandex.content_provider_server.content_provider.MyProvider"
             android:exported="true"
             tools:ignore="ExportedContentProvider"/>
 
-        <service android:name=".network.MyService"/>
-
-        <activity android:name=".MainActivity">
+        <service
+            android:name=".network.MyService"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="com.bobrusha.android.yandex.content_provider_server.content_provider.StartService"/>
             </intent-filter>
-        </activity>
+            </service>
+
     </application>
+
+
 </manifest>
