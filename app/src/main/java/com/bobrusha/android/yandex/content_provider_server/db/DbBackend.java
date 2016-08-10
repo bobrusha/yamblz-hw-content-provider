@@ -43,15 +43,15 @@ public class DbBackend {
     }
 
 
-    public void insertArtistCV(SQLiteDatabase db, ContentValues values) {
+    public long insertArtistCV(SQLiteDatabase db, ContentValues values) {
         if (db.isReadOnly()) {
-            return;
+            return -1;
         }
-        db.insert(Contract.ArtistEntry.TABLE_NAME, null, values);
+        return db.insertWithOnConflict(Contract.ArtistEntry.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
     }
 
-    public void insertArtistCV(ContentValues values) {
-        insertArtistCV(helper.getWritableDatabase(), values);
+    public long insertArtistCV(ContentValues values) {
+        return insertArtistCV(helper.getWritableDatabase(), values);
     }
 
     public void insertArtists(List<Artist> artists) {

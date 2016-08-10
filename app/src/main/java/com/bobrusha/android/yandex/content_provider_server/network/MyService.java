@@ -59,8 +59,8 @@ public class MyService extends IntentService {
                 result.addAll(response.body());
                 Log.d(DEBUG_TAG, "Size of " + result.size());
 
-                Uri uri = Uri.parse("content://" + MyProvider.provider);
                 for (Artist artist : result) {
+                    Uri uri = Uri.parse("content://" + MyProvider.provider + "/artist/" + artist.getId());
                     Log.d(DEBUG_TAG, artist.toString());
                     getContentResolver().insert(uri, getContentValuesFromArtist(artist));
                 }

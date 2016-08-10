@@ -39,7 +39,7 @@ public class DbBackendInsertTest {
     @Test
     public void testInsertArtist() throws Exception {
         Artist artist = TestUtils.getArtist(1);
-        dbBackend.insertArtistCV(DbBackend.convertArtistToContentValues(artist));
+        dbBackend.insertArtistCV(db, DbBackend.convertArtistToContentValues(artist));
         Assert.assertEquals(1, getCount(db, Contract.ArtistEntry.TABLE_NAME));
     }
 
