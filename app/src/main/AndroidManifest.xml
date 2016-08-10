@@ -4,6 +4,7 @@
           xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <permission android:name="ru.yandex.yamblz.READ_ARTISTS"/>
 
     <application
@@ -12,9 +13,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <provider
-            android:name="com.bobrusha.android.yandex.content_provider_server.content_provider.MyProvider"
+            android:name=".content_provider.MyProvider"
             android:authorities="com.bobrusha.android.yandex.content_provider_server.content_provider.MyProvider"
             android:exported="true"
             tools:ignore="ExportedContentProvider"/>
@@ -26,9 +26,18 @@
             <intent-filter>
                 <action android:name="com.bobrusha.android.yandex.content_provider_server.content_provider.StartService"/>
             </intent-filter>
-            </service>
+        </service>
 
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
-
 
 </manifest>

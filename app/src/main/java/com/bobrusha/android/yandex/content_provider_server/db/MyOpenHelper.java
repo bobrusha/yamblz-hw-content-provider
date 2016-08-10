@@ -9,8 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MyOpenHelper extends SQLiteOpenHelper {
 
-    //TODO: name db
-    public static final String DB_NAME = null;
+    public static final String DB_NAME = "artists.db";
     public static final int VERSION = 1;
 
     private static final String TEXT_TYPE = " TEXT";

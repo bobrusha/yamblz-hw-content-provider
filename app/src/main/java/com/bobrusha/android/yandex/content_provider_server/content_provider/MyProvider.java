@@ -3,6 +3,7 @@ package com.bobrusha.android.yandex.content_provider_server.content_provider;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -15,6 +16,7 @@ import android.util.Log;
 
 import com.bobrusha.android.yandex.content_provider_server.db.Contract;
 import com.bobrusha.android.yandex.content_provider_server.db.MyOpenHelper;
+import com.bobrusha.android.yandex.content_provider_server.network.MyService;
 
 /**
  * Created by Aleksandra on 05/08/16.
@@ -32,12 +34,15 @@ public class MyProvider extends ContentProvider {
 
     private MyOpenHelper dbHelper;
 
-
     @Override
     public boolean onCreate() {
         dbHelper = new MyOpenHelper(getContext());
+        Intent intent = new Intent();
+        intent.setClass(getContext(), MyService.class);
+        getContext().startService(intent);
         return true;
     }
+
 
     /**
      * Get method
@@ -63,9 +68,13 @@ public class MyProvider extends ContentProvider {
 
         Cursor cursor = dbHelper.getReadableDatabase().query(Contract.ArtistEntry.TABLE_NAME,
                 projection, selection, selectionArgs, null, null, sortOrder);
-        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+
+        cursor.moveToFirst();
+        Log.d(DEBUG_TAG, "count : " + cursor.getCount());
+        while (cursor.moveToNext()) {
             Log.d(DEBUG_TAG, cursor.toString());
         }
+        cursor.moveToFirst();
         return cursor;
     }
 
@@ -78,11 +87,9 @@ public class MyProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
-        Log.d(DEBUG_TAG, "in insert");
         long row = dbHelper.getWritableDatabase().insertWithOnConflict(Contract.ArtistEntry.TABLE_NAME,
                 null, contentValues, SQLiteDatabase.CONFLICT_REPLACE);
         uri = Uri.parse(provider + "/artist/" + row);
-        Log.d(DEBUG_TAG, uri.toString());
         if (getContext() != null) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
