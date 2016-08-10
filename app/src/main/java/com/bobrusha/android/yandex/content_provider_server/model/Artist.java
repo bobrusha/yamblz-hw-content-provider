@@ -154,45 +154,36 @@ public class Artist {
         return "Artist: " + id;
     }
 
-    public class Cover {
 
-        @SerializedName("small")
-        @Expose
-        private String small;
-        @SerializedName("big")
-        @Expose
-        private String big;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        /**
-         * @return The small
-         */
-        public String getSmall() {
-            return small;
-        }
+        Artist artist = (Artist) o;
 
-        /**
-         * @param small The small
-         */
-        public void setSmall(String small) {
-            this.small = small;
-        }
-
-        /**
-         * @return The big
-         */
-        public String getBig() {
-            return big;
-        }
-
-        /**
-         * @param big The big
-         */
-        public void setBig(String big) {
-            this.big = big;
-        }
+        if (!id.equals(artist.id)) return false;
+        if (!name.equals(artist.name)) return false;
+        if (!genres.equals(artist.genres)) return false;
+        if (!tracks.equals(artist.tracks)) return false;
+        if (!albums.equals(artist.albums)) return false;
+        if (link != null ? !link.equals(artist.link) : artist.link != null) return false;
+        if (!description.equals(artist.description)) return false;
+        return cover.equals(artist.cover);
 
     }
 
-
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + genres.hashCode();
+        result = 31 * result + tracks.hashCode();
+        result = 31 * result + albums.hashCode();
+        result = 31 * result + (link != null ? link.hashCode() : 0);
+        result = 31 * result + description.hashCode();
+        result = 31 * result + cover.hashCode();
+        return result;
+    }
 }
 
