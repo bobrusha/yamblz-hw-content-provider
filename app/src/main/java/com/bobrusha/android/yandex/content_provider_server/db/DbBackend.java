@@ -20,10 +20,12 @@ public class DbBackend {
 
     public DbBackend(Context context) {
         helper = new MyOpenHelper(context);
+        helper.setWriteAheadLoggingEnabled(true);
     }
 
     public DbBackend(MyOpenHelper helper) {
         this.helper = helper;
+        this.helper.setWriteAheadLoggingEnabled(true);
     }
 
     public Cursor getAllArtists() {
