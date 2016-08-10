@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <provider
-            android:name=".content_provider.MyProvider"
-            android:authorities="com.bobrusha.android.yandex.content_provider_server.content_provider.MyProvider"
+            android:name=".content_provider.ArtistsContentProvider"
+            android:authorities="com.bobrusha.android.yandex.content_provider_server.content_provider.ArtistsContentProvider"
             android:exported="true"
             tools:ignore="ExportedContentProvider"/>
 

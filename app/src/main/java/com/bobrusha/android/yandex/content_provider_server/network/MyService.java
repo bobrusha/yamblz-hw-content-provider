@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.bobrusha.android.yandex.content_provider_server.content_provider.MyProvider;
+import com.bobrusha.android.yandex.content_provider_server.content_provider.ArtistsContentProvider;
 import com.bobrusha.android.yandex.content_provider_server.db.Contract;
 import com.bobrusha.android.yandex.content_provider_server.model.Artist;
 import com.google.gson.Gson;
@@ -60,7 +60,7 @@ public class MyService extends IntentService {
                 Log.d(DEBUG_TAG, "Size of " + result.size());
 
                 for (Artist artist : result) {
-                    Uri uri = Uri.parse("content://" + MyProvider.provider + "/artist/" + artist.getId());
+                    Uri uri = Uri.parse("content://" + ArtistsContentProvider.provider + "/artist/" + artist.getId());
                     Log.d(DEBUG_TAG, artist.toString());
                     getContentResolver().insert(uri, getContentValuesFromArtist(artist));
                 }
