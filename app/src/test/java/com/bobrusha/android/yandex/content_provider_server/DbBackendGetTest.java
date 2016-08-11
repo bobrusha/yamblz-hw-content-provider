@@ -48,6 +48,8 @@ public class DbBackendGetTest {
     public void testGetArtistByName() throws Exception {
         final Cursor cursor = dbBackend.getArtistByName(expectedArtists.get(0).getName());
         cursor.moveToFirst();
+        System.out.print(cursor.getString(cursor.getColumnIndex(Contract.ArtistEntry.LIST_OF_GENRES)));
+        System.out.println(Arrays.deepToString(cursor.getColumnNames()));
         final Artist expectedArtist = getArtistFromCursor(cursor);
         Assert.assertEquals(expectedArtists.get(0), expectedArtist);
     }
@@ -73,7 +75,7 @@ public class DbBackendGetTest {
         artist.setName(c.getString(c.getColumnIndex(Contract.ArtistEntry.COLUMN_NAME_ARTIST_NAME)));
         artist.setAlbums(c.getInt(c.getColumnIndex(Contract.ArtistEntry.COLUMN_NAME_ALBUMS)));
         artist.setDescription(c.getString(c.getColumnIndex(Contract.ArtistEntry.COLUMN_NAME_DESCRIPTION)));
-        String[] genres = c.getString(c.getColumnIndex(Contract.ArtistEntry.COLUMN_NAME_GENRES)).split(", ", -1);
+        String[] genres = c.getString(c.getColumnIndex(Contract.ArtistEntry.LIST_OF_GENRES)).split(",", -1);
         artist.setGenres(Arrays.asList(genres));
         artist.setTracks(c.getInt(c.getColumnIndex(Contract.ArtistEntry.COLUMN_NAME_TRACKS)));
         artist.setLink(c.getString(c.getColumnIndex(Contract.ArtistEntry.COLUMN_NAME_LINK)));

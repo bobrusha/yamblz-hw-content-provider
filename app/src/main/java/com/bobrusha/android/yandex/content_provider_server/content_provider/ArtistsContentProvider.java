@@ -72,16 +72,8 @@ public class ArtistsContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
-        Uri resultUri = null;
-        switch (uriMatcher.match(uri)) {
-            case MATCH_ARTIST:
-                long rowId = backend.insertArtistCV(contentValues);
-                resultUri = Uri.parse(provider + "artist/" + rowId);
-                break;
-            default:
-                throw new RuntimeException("Unsupported uri");
-        }
-        return resultUri;
+        //I don't use it
+        return null;
     }
 
     @Override

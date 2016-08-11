@@ -37,10 +37,30 @@ public class DbBackendInsertTest {
     }
 
     @Test
+    public void testInsertGenre() throws Exception {
+        dbBackend.insertGenre(db, "qq");
+        long actual = getCount(db, Contract.GenreEntry.TABLE_NAME);
+        Assert.assertEquals(1, actual);
+    }
+
+    @Test
+    public void testInsertArtistGenre() throws Exception {
+        dbBackend.insertArtistGenre(db, 1, 1);
+        long actual = getCount(db, Contract.GenreArtistEntry.TABLE_NAME);
+        Assert.assertEquals(1, actual);
+    }
+
+    @Test
     public void testInsertArtist() throws Exception {
         Artist artist = TestUtils.getArtist(1);
-        dbBackend.insertArtistCV(db, DbBackend.convertArtistToContentValues(artist));
-        Assert.assertEquals(1, getCount(db, Contract.ArtistEntry.TABLE_NAME));
+        dbBackend.insertArtist(db, artist);
+        long expected = 3;
+        long actual = 0;
+        actual += getCount(db, Contract.ArtistEntry.TABLE_NAME);
+        actual += getCount(db, Contract.GenreArtistEntry.TABLE_NAME);
+        actual += getCount(db, Contract.GenreEntry.TABLE_NAME);
+
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
