@@ -48,7 +48,6 @@ public class DbBackendGetTest {
     public void testGetArtistByName() throws Exception {
         final Cursor cursor = dbBackend.getArtistByName(expectedArtists.get(0).getName());
         cursor.moveToFirst();
-        System.out.print(cursor.getString(cursor.getColumnIndex(Contract.ArtistEntry.LIST_OF_GENRES)));
         System.out.println(Arrays.deepToString(cursor.getColumnNames()));
         final Artist expectedArtist = getArtistFromCursor(cursor);
         Assert.assertEquals(expectedArtists.get(0), expectedArtist);

@@ -98,7 +98,7 @@ public class DbBackend {
         return resultId;
     }
 
-    public void insertArtists(List<Artist> artists) {
+    public int insertArtists(List<Artist> artists) {
         SQLiteDatabase db = helper.getWritableDatabase();
         db.beginTransaction();
         try {
@@ -109,6 +109,7 @@ public class DbBackend {
         } finally {
             db.endTransaction();
         }
+        return getAllArtists().getCount();
     }
 
     public long insertGenre(SQLiteDatabase db, String genre) {

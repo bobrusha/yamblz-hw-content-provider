@@ -58,7 +58,8 @@ public class MyService extends IntentService {
                 result.addAll(response.body());
                 Log.d(DEBUG_TAG, "Size of " + result.size());
 
-                backend.insertArtists(result);
+                int inserted = backend.insertArtists(result);
+                Log.d(DEBUG_TAG, "inserted " + inserted);
             }
 
             @Override

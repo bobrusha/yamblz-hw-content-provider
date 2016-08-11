@@ -12,7 +12,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     public static final String DEBUG_TAG = MyOpenHelper.class.getName();
 
     public static final String DB_NAME = "artists.db";
-    public static final int VERSION = 2;
+    public static final int VERSION = 3;
 
     private static final String CREATE_TABLE = "CREATE TABLE ";
     private static final String PRIMARY_KEY = " PRIMARY KEY ";
@@ -22,8 +22,6 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     private static final String SEP = ", ";
     private static final String FOREIGN_KEY = "FOREIGN KEY( ";
     private static final String REFERENCES = " REFERENCES ";
-
-    private static final String UNIQUE = " UNIQUE ";
 
     private static final String CREATE_ARTIST_TABLE = CREATE_TABLE + Contract.ArtistEntry.TABLE_NAME +
             " (" + Contract.ArtistEntry._ID + INTEGER_TYPE + PRIMARY_KEY + SEP +
