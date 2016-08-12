@@ -55,6 +55,11 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + Contract.ArtistEntry.TABLE_NAME;
 
+    private static final String ARTIST_NAME_INDEX = "artist_name_index";
+    private static final String CREATE_ARTIST_NAME_INDEX = "CREATE INDEX " + ARTIST_NAME_INDEX +
+            " ON " + Contract.ArtistEntry.TABLE_NAME + " (" + Contract.ArtistEntry.COLUMN_NAME_ARTIST_NAME +
+            ");";
+
     public MyOpenHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
 
@@ -65,6 +70,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(CREATE_ARTIST_TABLE);
         sqLiteDatabase.execSQL(CREATE_GENRE_TABLE);
         sqLiteDatabase.execSQL(CREATE_GENRE_ARTIST_TABLE);
+        sqLiteDatabase.execSQL(CREATE_ARTIST_NAME_INDEX);
 
         Log.d(DEBUG_TAG, CREATE_ARTIST_TABLE);
         Log.d(DEBUG_TAG, CREATE_GENRE_TABLE);
